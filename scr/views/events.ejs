@@ -1,0 +1,144 @@
+<%- include ('masterPage/header') %>
+
+
+
+    <article class="">
+      <form class="form5" action="/addNewEvent" method="post">
+
+        <div class="divBorde">
+          <div class="divSession">
+            <label class="labelRegistro" for=""><%= day%> de <%= month_text%> del <%= year%></label>
+          </div>
+
+          <div class="divDatosFlex">
+            <label class="datos3" for=""> Lugar: </label>
+            <input class="form2" maxlength="100" type="text" name="place" required value="">
+          </div>
+
+          <div class="divDatosFlex">
+            <label class="datos3" for=""> Descripcion: </label>
+            <input class="form2" maxlength="100" type="text" name="description_event" required value="">
+          </div>
+
+        <div class="divDatosFlex">
+          <label class="datos3" for=""> Inicio: </label>
+
+            <select class="combox" name="inicio_hora">
+                <%for(var i = 1; i < 13; i++) {%>
+                    <option value="<%=i%>"><%=i%></option>
+                <%}%>
+            </select>
+
+            <select class="combox" name="inicio_minutos">
+              <%for(var h = 0; h < 6; h++) {%>
+                <%for(var i = 0; i < 10; i++) {%>
+                      <option value="<%=h%><%=i%>"><%=h%><%=i%></option>
+                <%}%>
+              <%}%>
+            </select>
+            <select class="combox" name="inicio_horario">
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+        </div>
+
+        <div class="divDatosFlex">
+          <label class="datos3" for=""> Fin: </label>
+
+            <select class="combox" name="final_hora">
+                <%for(var i = 1; i < 13; i++) {%>
+                    <option value="<%=i%>"><%=i%></option>
+                <%}%>
+            </select>
+
+            <select class="combox" name="final_minutos">
+              <%for(var h = 0; h < 6; h++) {%>
+                <%for(var i = 0; i < 10; i++) {%>
+                      <option value="<%=h%><%=i%>"><%=h%><%=i%></option>
+                <%}%>
+              <%}%>
+            </select>
+            <select class="combox" name="final_horario">
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+        </div>
+
+        <div class="divBottonEvent">
+          <button class="general2" type="submit">Agregar</button>
+        </div>
+
+
+      </form>
+      </article>
+      <article>
+        <% if(data[0][0] !== undefined) {%>
+        <div class="col-md-8 ">
+          <div class="">
+            <div class="">
+              <table class="">
+                <thead>
+                    <tr>
+                      <th class="num">N°</th>
+                      <th>Lugar</th>
+                      <th>Descripción</th>
+                      <th class="tel">Hora inicio</th>
+                      <th>Hora fin</th>
+                      <th class="acc">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <% if(data) {%>
+                    <%for(var i = 0; i < data[0].length; i++) {%>
+                      <tr>
+                        <td><%=i + 1%></td>
+                        <td><%= data[0][i].place %></td>
+                        <td><%= data[0][i].description_event %></td>
+                        <td><%= data[0][i].start_time %> <%= data[0][i].schedule_start %></td>
+                        <td><%= data[0][i].end_time %> <%= data[0][i].schedule_end %></td>
+
+                      <td><a href="#" onclick="deleteEvent('<%= data[0][i].id_event %>')" class="fa fa-trash delete"><a></td>
+                      </tr>
+                    <% }%>
+                  <%}%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <%}%>
+    </article>
+
+  </body>
+
+  <footer>
+      <hr class="hrTitulo">
+  </footer>
+
+  <% if (message) { %>
+    <script>
+    Swal.fire({
+      toast: true,
+      position: 'center',
+      icon: 'warning',
+      title: 'Favor escoger un rango de horas valido.',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    </script>
+  <% } %>
+
+  <% if (existe_event) { %>
+    <script>
+    Swal.fire({
+      position: 'center',
+      icon: 'warning',
+      title: 'Ya exite un evento programado para esa fecha en el mismo rango de fecha.',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    </script>
+  <% } %>
+
+
+  </html>

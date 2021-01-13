@@ -1,0 +1,96 @@
+<%- include ('masterPage/header') %>
+
+<h1>Listado de Coachee</h1>
+
+<fieldset>
+  <div class="col-md-8 ">
+    <div class="">
+      <div class="">
+        <table class="">
+          <thead>
+              <tr>
+                <th class="num">N°</th>
+                <th>Coachee</th>
+                <th class="tel">Telefono</th>
+                <th>Correo</th>
+                <th class="acc">Nueva sesión</th>
+                <th class="acc">Eliminar</th>
+                <th class="acc">Consultar</th>
+
+
+                <!--<th class="acc">Info...</th>-->
+              </tr>
+          </thead>
+          <tbody>
+            <% if(data) {%>
+              <%for(var i = 0; i < data[0].length; i++) {%>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= data[0][i].nombre_coachee %></td>
+                  <td><%= data[0][i].telefono %></td>
+                  <td><%= data[0][i].correo %> </td>
+
+                  <td><a href="/plus/<%= data[0][i].nombre_coachee %>" class="far fa-plus-square  more"><a></td>
+
+                  <td><a href="#" onclick="deleteCoachee('<%= data[0][i].id_registro %>')" class="fa fa-trash delete"><a></td>
+
+                  <td><a href="/update/<%= data[0][i].id_registro %>" class="fas fa-search update"><a></td>
+
+
+
+                </tr>
+              <% }%>
+            <%}%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</fieldset>
+
+</body>
+
+<footer>
+  <hr class="hrTitulo">
+</footer>
+
+<% if (problem) { %>
+  <script>
+    Swal.fire({
+      position: 'center',
+      icon: 'warning',
+      title: 'Ocurrio algo!',
+      text: 'Es posible que existan datos que dependan de esta informacion por lo tanto no se puede eliminar',
+      showConfirmButton: false,
+      timer: 2500
+    })
+  </script>
+
+<% } %>
+
+<% if (deleteInf) { %>
+  <script>
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Informacion eliminda con exito!',
+      showConfirmButton: false,
+      timer: 1500
+      })
+  </script>
+
+<% } %>
+
+<% if (updateInfo) { %>
+  <script>
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Informacion modificada con exito!',
+    showConfirmButton: false,
+    timer: 1500
+  })
+  </script>
+<% } %>
+
+</html>

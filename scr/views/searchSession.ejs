@@ -1,0 +1,174 @@
+<%- include ('masterPage/header') %>
+
+    <article>
+      <form class="form1" action="/updateSession" method="post">
+        <div class="divSession">
+          <label class="labelSesion" for="">Sesión # <%= num_sesion %></label>
+            <input class="disabled" type="text" readonly="readonly" name="num_sesion"  value="<%=num_sesion %>">
+        </div>
+        <fieldset>
+          <div class="divBorde">
+
+                <div class="divDatosFlex">
+                  <div class="divDatosCoachee">
+                        <label class="datos" for="">Nombre coachee:  </label>
+                  </div>
+                  <div class="divDatosCoacheeInput">
+                    <input class="form" type="text" readonly="readonly" name="nombre_coachee" required value="<%= nombre_coachee %>">
+                  </div>
+
+                </div>
+
+          </div>
+        </fieldset>
+
+      <fieldset>
+        <div class="divBorde">
+          <div class="divDatosFlex">
+            <div class="divDatosCoachee">
+                  <label class="datos" for="">Tema:  </label>
+            </div>
+          <input class="form" type="text" name="tema"  required value="<%= tema %>">
+          </div>
+          <div class="divFecha">
+            <div class="divDatosFlex">
+              <label class="datos4" for=""> Fecha: </label>
+
+                <select class="combox1" name="dia">
+                  <option value="Día">Día</option>
+                    <%for(var i = 1; i < 32; i++) {%>
+                        <option value="<%=i%>"><%=i%></option>
+                    <%}%>
+                </select>
+
+                <select class="combox3" name="mes">
+                  <option value="Mes">Mes</option>
+                  <option value="1">Enero</option>
+                  <option value="2">Febrero</option>
+                  <option value="3">Marzo</option>
+                  <option value="4">Abril</option>
+                  <option value="5">Mayo</option>
+                  <option value="6">Junio</option>
+                  <option value="7">Julio</option>
+                  <option value="8">Agosto</option>
+                  <option value="9">Septiembre</option>
+                  <option value="10">Octubre</option>
+                  <option value="11">Noviembre</option>
+                  <option value="12">Diciembre</option>
+                </select>
+
+                <select class="combox2" name="anno">
+                  <option value="Año">Año</option>
+                    <%for(var i = 20; i < 100; i++) {%>
+                        <option value="<%=i%>">20<%=i%></option>
+                    <%}%>
+                </select>
+
+            </div>
+          </div>
+        </div>
+        <div class="divFlex">
+
+          <div id="actual" class="divBorde2">
+            <label class="darck" for="">Situación actual o realidad: </label>
+
+            <% for (var i = 0; i < data_actual.length; i++) {%>
+              <% if( data_actual[i] !== null ){ %>
+                <input  id="actual_<%=i + 1%>" maxlength="250" type="text" name="newItem_actual_<%=i+ 1%>" value="<%= data_actual[i] %>">
+              <%}%>
+            <%}%>
+
+            <button class="newItem" type="button" id="btn" onclick="newItem('actual', '<%= num_actual%>')" name="button">+</button>
+            <button class="delateItem" type="button" id="btn4" onclick="delateItem('actual', '<%= num_actual%>')" name="button">-</button>
+
+          </div>
+
+          <div id="ideal" class="divBorde2">
+            <label class="darck" for="">Situación Ideal: </label>
+
+            <% for (var i = 0; i < data_ideal.length; i++) {%>
+              <% if( data_ideal[i] !== null ){ %>
+                <input  id="ideal_<%=i + 1%>" maxlength="250" type="text" name="newItem_ideal_<%=i+ 1%>" value="<%= data_ideal[i] %>">
+              <%}%>
+            <%}%>
+
+            <button class="newItem" type="button" id="btn1" onclick="newItem('ideal', '<%= num_ideal%>')" name="button">+</button>
+            <button class="delateItem" type="button" id="btn4" onclick="delateItem('ideal', '<%= num_ideal%>')" name="button">-</button>
+
+          </div>
+        </div>
+
+        <div class="">
+          <div id="opcion" class="divBorde3">
+            <label class="darck" for="">Opciones:  </label>
+
+            <% for (var i = 0; i < data_opcionS.length; i++) {%>
+              <% if( data_opcionS[i] !== null ){ %>
+                <input  id="opcion_<%=i + 1%>" maxlength="250" type="text" name="newItem_opcion_<%=i+ 1%>" value="<%= data_opcionS[i] %>">
+              <%}%>
+            <%}%>
+
+            <button class="newItem" type="button" id="btn2" onclick="newItem('opcion', '<%= num_opcion%>')" name="button">+</button>
+            <button class="delateItem" type="button" id="btn4" onclick="delateItem('opcion', '<%= num_opcion%>')" name="button">-</button>
+          </div>
+
+          <div id="accion" class="divBorde3">
+            <label class="darck" for="">Plan de acción:  </label>
+
+            <% for (var i = 0; i < data_accion.length; i++) {%>
+              <% if( data_accion[i] !== null ){ %>
+                <input  id="accion_<%=i + 1%>" maxlength="250" type="text" name="newItem_accion_<%=i+ 1%>" value="<%= data_accion[i] %>">
+              <%}%>
+            <%}%>
+
+            <button class="newItem" type="button" id="btn3" onclick="newItem('accion', '<%= num_accion%>')" name="button">+</button>
+            <button class="delateItem" type="button" id="btn4" onclick="delateItem('accion', '<%= num_accion%>')" name="button">-</button>
+
+            <div class="div_Botton_Enviar_Plan">
+              <button class="send_mail_bottom" type="button"><a class="link_plan" href="/sendMail">Enviar plan de acción</a></button>
+            </div>
+          </div>
+
+        </fieldset>
+        <div class="divBottonEnviar">
+          <button class="general" type="submit">Modificar</button>
+        </div>
+
+      </form>
+    </div>
+    </article>
+
+
+  </body>
+
+  <footer>
+      <hr class="hrTitulo">
+  </footer>
+
+  <% if(email == 2) { %>
+    <script>
+    Swal.fire({
+
+      position: 'center',
+      icon: 'success',
+      title: 'Plan enviado con exito.',
+      showConfirmButton: false,
+      timer: 2000
+    })
+    </script>
+  <% } %>
+
+  <% if(email == 1) { %>
+    <script>
+    Swal.fire({
+      position: 'center',
+      icon: 'warning',
+      title: 'El coachee no cuenta con un correo registrado.',
+      showConfirmButton: false,
+      timer: 2000
+    })
+    </script>
+  <% } %>
+
+
+</html>

@@ -1,0 +1,152 @@
+<%- include ('masterPage/header') %>
+    <article class="">
+
+        <form class="form3" action="/searchCoachee" method="post">
+          <div class="divSession">
+            <label class="labelSesion" for="">Sesión # <%= cantSesion %></label>
+          </div>
+
+            <div class="divBorde">
+
+                  <div class="divDatosFlex">
+                    <div class="divDatosCoachee">
+                          <label class="datos" for="">Nombre coachee:  </label>
+                    </div>
+                    <div class="divDatosCoacheeInput">
+                      <input class="form" maxlength="150" type="text" name="nombre_coachee" required value="<%= nombre_coachee %>">
+                    </div>
+
+                  </div>
+
+            </div>
+            <div class="divBtnSearch">
+              <button type="submit" class="fa fa-plus" name="btnSearch"></button>
+            </div>
+
+
+        </form>
+
+      <form class="form1" action="/addSesion" method="post">
+
+        <div class="divBorde">
+          <div class="divDatosFlex">
+            <div class="divDatosCoachee">
+                  <label class="datos" for="">Tema:  </label>
+            </div>
+          <input class="form" maxlength="150" type="text" name="tema"  required value="">
+          </div>
+          <div class="divFecha">
+            <div class="divDatosFlex">
+              <label class="datos4" for=""> Fecha: </label>
+
+                <select class="combox1" name="dia">
+                  <option value="Día">Día</option>
+                    <%for(var i = 1; i < 32; i++) {%>
+                        <option value="<%=i%>"><%=i%></option>
+                    <%}%>
+                </select>
+
+                <select class="combox3" name="mes">
+                  <option value="Mes">Mes</option>
+                  <option value="1">Enero</option>
+                  <option value="2">Febrero</option>
+                  <option value="3">Marzo</option>
+                  <option value="4">Abril</option>
+                  <option value="5">Mayo</option>
+                  <option value="6">Junio</option>
+                  <option value="7">Julio</option>
+                  <option value="8">Agosto</option>
+                  <option value="9">Septiembre</option>
+                  <option value="10">Octubre</option>
+                  <option value="11">Noviembre</option>
+                  <option value="12">Diciembre</option>
+                </select>
+
+                <select class="combox2" name="anno">
+                  <option value="Año">Año</option>
+                    <%for(var i = 20; i < 100; i++) {%>
+                        <option value="<%=i%>">20<%=i%></option>
+                    <%}%>
+                </select>
+
+            </div>
+          </div>
+
+        </div>
+        <div class="divFlex">
+
+          <div id="actual" class="divBorde2">
+            <label class="darck" for="">Situación actual o realidad: </label>
+              <input  id="actual_1" maxlength="250" type="text" name="newItem_actual_1" value="">
+              <button class="newItem" type="button" id="btn" onclick="newItem('actual', '1')" name="button">+</button>
+              <button class="delateItem" type="button" id="btn4" onclick="delateItem('actual')" name="button">-</button>
+          </div>
+
+          <div id="ideal" class="divBorde2">
+            <label class="darck" for="">Situación Ideal: </label>
+            <input  id="ideal_1" maxlength="250" type="text" name="newItem_ideal_1" value="">
+            <button class="newItem" type="button" id="btn1" onclick="newItem('ideal', '1')" name="button">+</button>
+            <button class="delateItem" type="button" id="btn4" onclick="delateItem('ideal')" name="button">-</button>
+          </div>
+
+        </div>
+        <div class="">
+          <div id="opcion" class="divBorde3">
+            <label class="darck" for="">Opciones:  </label>
+            <input  id="opcion_1" maxlength="250" type="text" name="newItem_opcion_1" value="">
+            <button class="newItem" type="button" id="btn2" onclick="newItem('opcion', '1')" name="button">+</button>
+            <button class="delateItem" type="button" id="btn4" onclick="delateItem('opcion', '1')" name="button">-</button>
+          </div>
+
+          <div id="accion" class="divBorde3">
+            <label class="darck" for="">Plan de acción:  </label>
+            <input  id="accion_1" maxlength="250" type="text" name="newItem_accion_1" value="">
+
+            <button class="newItem" type="button" id="btn3" onclick="newItem('accion', '1')" name="button">+</button>
+            <button class="delateItem" type="button" id="btn4" onclick="delateItem('accion')" name="button">-</button>
+          </div>
+
+        </div>
+
+        <div class="divBotton">
+          <button class="general" type="submit">Agregar</button>
+        </div>
+      </form>
+
+    </article>
+
+
+  </body>
+
+  <footer>
+      <hr class="hrTitulo">
+  </footer>
+
+
+    <% if (existe) { %>
+      <script>
+      Swal.fire({
+        toast: true,
+        position: 'center',
+        icon: 'warning',
+        title: 'Coachee no existe',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      </script>
+    <% } %>
+
+    <% if (guardo) { %>
+      <script>
+      Swal.fire({
+        toast: true,
+        position: 'center',
+        icon: 'success',
+        title: 'Guardado con exito',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      </script>
+    <% } %>
+
+</html>

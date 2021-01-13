@@ -1,0 +1,159 @@
+<%- include ('masterPage/header') %>
+
+
+
+    <article class="">
+      <form class="form2" action="/addCoaching" method="post" enctype="multipart/form-data">
+
+
+        <div class="divBorde">
+          <div class="divSession">
+            <label class="labelRegistro" for="">REGISTRO COACH</label>
+          </div>
+
+          <div class="divDatosFlex">
+            <label class="datos" for="">Nombre del coach: </label>
+            <input class="form2" type="text" name="name_coaching"  readonly="readonly" value=" <%= nombre %> ">
+          </div>
+        </div>
+        <div class="divBorde">
+          <div class="divDatosFlex">
+            <label class="datos2" for="">Nombre Completo del coachee: </label>
+            <input maxlength="100" class="form" type="text" name="name_coachee" required value="">
+          </div>
+
+          <div class="divDatosFlex">
+            <label class="datos2" for="">Teléfono:  </label>
+            <input maxlength="20" class="form" type="text" name="telefono" required  value="">
+          </div>
+
+          <div class="divDatosFlex">
+            <label class="datos2" for="">Correo Electrónico: </label>
+            <input maxlength="100" class="form" type="text" name="email" requireds value="">
+          </div>
+        </div>
+        <div class="divFlex">
+          <div class="divBorde4">
+            <label class="darck" for="">Contexto del coachee: </label>
+            <textarea maxlength="500" class="textAreaFlex"  name="contexto"></textarea>
+          </div>
+          <div class="divBorde4">
+            <label class="darck" for="">Observación Corporal del coachee: </label>
+            <textarea maxlength="500" class="textAreaFlex2"   name="observacion"></textarea>
+            <input type="file" id = "image" class="inputImage" name="imagen" >
+            <input type="text" name="image_input" value="" class="disabled" id="imag">
+          </div>
+        </div>
+        <div class="divBorde5">
+          <label class="darck" for="">Lenguaje Verbal:  </label>
+          <textarea maxlength="500" class="textAreaFlex"  name="verbal"></textarea>
+        </div>
+        <div class="divBorde5">
+          <label class="darck" for="">Lenguaje para-verbal:  </label>
+          <textarea maxlength="500" class="textAreaFlex"  name="para_verbal"></textarea>
+        </div>
+        <div class="divBorde5">
+          <label class="darck" for="">Lenguaje No Verbal:   </label>
+          <textarea maxlength="500" class="textAreaFlex"  name="no_verbal"></textarea>
+        </div>
+        <div class="divBorde5">
+          <label class="darck" for="">Rol y Emociones:    </label>
+          <textarea maxlength="500" class="textAreaFlex"  name="rol_emociones"></textarea>
+        </div>
+
+        <div class="divBotton">
+          <button class="general" onclick="textImg()" type="submit">Agregar</button>
+        </div>
+      </form>
+
+    </article>
+
+  </body>
+
+  <footer>
+      <hr class="hrTitulo">
+  </footer>
+
+<script>
+      document.getElementById('image').onchange = function () {
+        document.getElementById('imag').value = document.getElementById('image').files[0].name;
+      }
+</script>
+
+<% if(newSession) { %>
+  <script>
+  Swal.fire({
+    toast: true,
+    position: 'bottom-end',
+    icon: 'success',
+    title: 'Bienvenido',
+    showConfirmButton: false,
+    timer: 1500
+  })
+  </script>
+<% } %>
+
+<% if(registra) { %>
+  <script>
+  Swal.fire({
+
+    position: 'center',
+    icon: 'success',
+    title: 'Agregado con exito.',
+    showConfirmButton: false,
+    timer: 1500
+  })
+  </script>
+<% } %>
+
+<% if(registrado) { %>
+  <script>
+  Swal.fire({
+    position: 'center',
+    icon: 'warning',
+    title: 'El coachee ya tiene una hoja de vida.',
+    showConfirmButton: false,
+    timer: 2500
+  })
+  </script>
+<% } %>
+
+<% if(event_tomorrow_v) { %>
+  <script>
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'si_elimina',
+          cancelButton: 'no_elimina'
+        },
+        buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Recordatorio de evento',
+        text: "Existen eventos en agenda para el día de mañana.",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Muestrame',
+        cancelButtonText: 'Salir',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+          window.location.href = "/tomorrow";
+        } else if (
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire({
+          position: 'center',
+          icon: 'info',
+          title: 'Cancelado!',
+          text: 'Este mensaje se volvera a mostrar.',
+          showConfirmButton: false,
+          buttons: false,
+          timer: 2500
+        })
+        }
+      })
+  </script>
+<% } %>
+
+</html>

@@ -1,0 +1,135 @@
+<%- include ('masterPage/header') %>
+
+
+
+<h1>Listado de Comentarios</h1>
+
+<form class="form4" action="/searchCommentary" method="post">
+  <fieldset>
+    <div class="divBorde">
+
+          <div class="divDatosFlex">
+            <div class="divDatosCoachee">
+                  <label class="datos" for="">Palabra clave:  </label>
+            </div>
+            <div class="divDatosCoacheeInput">
+              <input class="form" type="text" name="palabra_clave" required value="<%= palabra_clave %>">
+            </div>
+
+          </div>
+
+    </div>
+    <div class="divBtnSearch">
+      <button type="submit" class="fa fa-search" name="btnSearch"></button>
+    </div>
+
+  </fieldset>
+</form>
+
+<fieldset>
+  <div class="col-md-8 ">
+    <div class="">
+      <div class="">
+        <table class="">
+          <thead>
+              <tr>
+                <th >Nombre</th>
+                <th class="num">Identificación</th>
+                <th >Email</th>
+                <th class="num">Imagen</th>
+
+                <th class="acc">Informacion</th>
+                <th class="acc">Eliminar</th>
+                <!--<th class="acc">Info...</th>-->
+              </tr>
+          </thead>
+          <tbody>
+             <% if(data) {%>
+              <%for(var i = 0; i < data[0].length; i++) {%>
+                <tr>
+                  <td><%= data[0][i].nombre_completo %></td>
+                  <td><%= data[0][i].identificacion %></td>
+                  <td><%= data[0][i].email %></td>
+
+                  <% if(data[0][i].imagen !== "") {%>
+                    <td>  <a href="/images/<%=data[0][i].imagen%>" class="fa fa-picture-o more"></a></td>
+                  <% }%>
+                  <% if(data[0][i].imagen == "") {%>
+                    <td>  <a href="#" class="fa fa-times delete"></a></td>
+                  <% }%>
+
+                  <td><a href="/see/<%= data[0][i].nombre_completo %>/<%= data[0][i].identificacion %>/<%= data[0][i].email %>/<%= data[0][i].commentary %>/<%=data[0][i].imagen%>" class="fas fa-search update"><a></td>
+
+                  <td><a href="#" onclick="deleteCommentary('<%= data[0][i].id_commentary %>')" class="fa fa-trash delete"><a></td>
+
+
+
+                </tr>
+              <% }%>
+            <%}%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</fieldset>
+
+</body>
+
+<footer>
+  <hr class="hrTitulo">
+</footer>
+
+<% if (problem) { %>
+  <script>
+  Swal.fire({
+    position: 'center',
+    icon: 'warning',
+    title: 'Ocurrio algo!',
+    text: 'Es posoble que existan datos que dependan de esta informacion por lo tanto no se puede eliminar',
+    showConfirmButton: false,
+    timer: 1500
+  })
+  </script>
+<% } %>
+
+<% if (deleteInf) { %>
+  <script>
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Informacion eliminda con exito!',
+    showConfirmButton: false,
+    timer: 1500
+  })
+  </script>
+<% } %>
+
+<% if (updateInfo) { %>
+  <script>
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Informacion modificada con exito!',
+    showConfirmButton: false,
+    timer: 1500
+  })
+  </script>
+<% } %>
+
+<% if (existe) { %>
+  <script>
+  Swal.fire({
+    toast: true,
+    position: 'center',
+    icon: 'warning',
+    title: 'No existen datos realicionados con la palabra clave.',
+    showConfirmButton: false,
+    timer: 1500
+  })
+  </script>
+<% } %>
+
+
+
+</html>

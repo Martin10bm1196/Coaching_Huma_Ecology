@@ -1,0 +1,85 @@
+<%- include ('masterPage/header') %>
+
+    <article class="">
+      <form class="form2" action="/updateCoachee" method="post">
+
+      <fieldset>
+        <div class="divBorde">
+          <div class="divSession">
+            <label class="labelRegistro" for="">COSULTA COACH</label>
+          </div>
+
+          <div class="divDatosFlex">
+            <label class="datos" for="">Nombre del coach: </label>
+            <input class="form2" type="text" name="name_coaching" value="<%=data[0][0].nombre_coaching%>" readonly="readonly">
+          </div>
+        </div>
+        <div class="divBorde">
+          <div class="divDatosFlex">
+            <label class="datos2" for="">Nombre Completo del coachee: </label>
+            <input maxlength="100" class="form" type="text" name="name_coachee" value="<%=data[0][0].nombre_coachee%>" readonly="readonly">
+          </div>
+
+          <div class="divDatosFlex">
+            <label class="datos2" for="">Teléfono:  </label>
+            <input maxlength="20" class="form" type="text" name="telefono" value="<%=data[0][0].telefono%>">
+          </div>
+
+          <div class="divDatosFlex">
+            <label class="datos2" for="">Correo Electrónico: </label>
+            <input maxlength="100" class="form" type="text" name="email" value="<%=data[0][0].correo%>">
+          </div>
+        </div>
+        <div class="divFlex">
+          <div class="divBorde4">
+            <label class="darck" for="">Contexto del coachee: </label>
+            <textarea maxlength="500" class="textAreaFlex"  name="contexto"><%=data[0][0].contexto%></textarea>
+          </div>
+          <div class="divBorde4">
+            <label class="darck" for="">Observación Corporal del coachee: </label>
+            <textarea maxlength="500" class="textAreaFlex" name="observacion"><%=data[0][0].observaciones%></textarea>
+            <div class="divImagenVer">
+              <%if (data[0][0].imagen_observacion !== "" ){%>
+
+                <a href="/images/<%=data[0][0].imagen_observacion%>""> Ver imagen...</a>
+
+              <%}else{%>
+                <img src="" class="imagen_observacion" alt="Sin imagen">
+              <%}%>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="divBorde5">
+          <label class="darck" for="">Lenguaje Verbal:  </label>
+          <textarea maxlength="500" class="textAreaFlex" name="verbal"><%=data[0][0].verbal%></textarea>
+        </div>
+        <div class="divBorde5">
+          <label class="darck" for="">Lenguaje para-verbal:  </label>
+          <textarea maxlength="500" class="textAreaFlex" name="para_verbal"><%=data[0][0].para_verbal%></textarea>
+        </div>
+        <div class="divBorde5">
+          <label class="darck" for="">Lenguaje No Verbal:   </label>
+          <textarea maxlength="500" class="textAreaFlex" name="no_verbal"><%=data[0][0].no_verbal%></textarea>
+        </div>
+        <div class="divBorde5">
+          <label class="darck" for="">Rol y Emociones:    </label>
+          <textarea maxlength="500" class="textAreaFlex" name="rol_emociones"><%=data[0][0].rol_emociones%></textarea>
+        </div>
+
+        <div class="divBotton">
+          <button class="general" type="submit">Modificar</button>
+        </div>
+
+
+        </fieldset>
+      </form>
+
+    </article>
+
+  </body>
+
+  <footer>
+      <hr class="hrTitulo">
+  </footer>

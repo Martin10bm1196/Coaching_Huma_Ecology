@@ -1,0 +1,126 @@
+<%- include ('masterPage/header') %>
+
+
+
+<h1>Listado de Sesiones</h1>
+
+<form class="form4" action="/searchCoacheeSession" method="post">
+  <fieldset>
+    <div class="divBorde">
+
+          <div class="divDatosFlex">
+            <div class="divDatosCoachee">
+                  <label class="datos" for="">Nombre coachee:  </label>
+            </div>
+            <div class="divDatosCoacheeInput">
+              <input class="form" type="text" name="nombre_coachee" required value="<%= nombre %>">
+            </div>
+
+          </div>
+
+    </div>
+    <div class="divBtnSearch">
+      <button type="submit" class="fa fa-search" name="btnSearch"></button>
+    </div>
+
+  </fieldset>
+</form>
+
+<fieldset>
+  <div class="col-md-8 ">
+    <div class="">
+      <div class="">
+        <table class="">
+          <thead>
+              <tr>
+                <th class="num">N° Sesión</th>
+                <th class="num">Fecha</th>
+                <th >Nombre</th>
+                <th>Tema</th>
+                <th class="acc">Eliminar</th>
+                <th class="acc">Informacion</th>
+                <!--<th class="acc">Info...</th>-->
+              </tr>
+          </thead>
+          <tbody>
+            <% if(data) {%>
+              <%for(var i = 0; i < data[0].length; i++) {%>
+                <tr>
+                  <td><%= data[0][i].num_sesion %></td>
+                  <td><%= data[0][i].date_sesion %></td>
+                  <td><%= data[0][i].nombre_coachee %></td>
+                  <td><%= data[0][i].tema %></td>
+
+                <td><a href="#" onclick="deleteSesion('<%= data[0][i].id_registro %>' , ' <%= data[0][i].id_sesion %>')" class="fa fa-trash delete"><a></td>
+
+                  <td><a href="/updateS/<%= data[0][i].id_sesion %>" class="fas fa-search update"><a></td>
+
+                </tr>
+              <% }%>
+            <%}%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</fieldset>
+
+</body>
+
+<footer>
+  <hr class="hrTitulo">
+</footer>
+
+<% if (problem) { %>
+  <script>
+  Swal.fire({
+    position: 'center',
+    icon: 'warning',
+    title: 'Ocurrio algo!',
+    text: 'Es posoble que existan datos que dependan de esta informacion por lo tanto no se puede eliminar',
+    showConfirmButton: false,
+    timer: 1500
+  })
+  </script>
+<% } %>
+
+<% if (deleteInf) { %>
+  <script>
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Informacion eliminda con exito!',
+    showConfirmButton: false,
+    timer: 1500
+  })
+  </script>
+<% } %>
+
+<% if (updateInfo) { %>
+  <script>
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Informacion modificada con exito!',
+    showConfirmButton: false,
+    timer: 1500
+  })
+  </script>
+<% } %>
+
+<% if (existe) { %>
+  <script>
+  Swal.fire({
+    toast: true,
+    position: 'center',
+    icon: 'warning',
+    title: 'Datos del coachee inexistentes',
+    showConfirmButton: false,
+    timer: 1500
+  })
+  </script>
+<% } %>
+
+
+
+</html>

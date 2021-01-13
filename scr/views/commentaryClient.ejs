@@ -1,0 +1,97 @@
+
+
+  <%- include ('masterPage/header') %>
+
+    <form class="form2" action="/addCommentaryClient" method="post" enctype="multipart/form-data">
+
+    <h1>Nuevo comentario</h1>
+
+    <fieldset>
+
+      <div class="divBorde">
+        <div class="divDatosFlex">
+          <div class="divDatosCoachee">
+                <label class="datos" for="">Nombre completo:  </label>
+          </div>
+          <div class="divDatosCoacheeInput">
+            <input class="form" type="text" name="nombre_completo" required value="<%= nombre %>">
+          </div>
+        </div>
+        <div class="divDatosFlex">
+          <div class="divDatosCoachee">
+                <label class="datos" for="">Identificacion:  </label>
+          </div>
+          <div class="divDatosCoacheeInput">
+            <input class="form" type="text" name="identificacion" value="<%= identificacion %>">
+          </div>
+        </div>
+        <div class="divDatosFlex">
+          <div class="divDatosCoachee">
+                <label class="datos" for="">Correo electronico:  </label>
+          </div>
+          <div class="divDatosCoacheeInput">
+            <input class="form" type="text" name="email"  value="<%= email %>">
+          </div>
+        </div>
+      </div>
+
+      <div class="divBorde5">
+        <label class="darck" for="">Comentario:  </label>
+        <textarea class="textAreaFlex3"  id="bio" name="comentario"><%= comentario %></textarea>
+
+        <div class="">
+          <% if(imagen == undefined) { %>
+            <input type="file" id = "image" class="inputImage" name="imagen" >
+            <input type="text" name="image_input" value="" class="disabled" id="imag">
+          <%}%>
+          <% if(imagen !== undefined) { %>
+            <!-- <a href="/images/<%= imagen %>" class="fa fa-picture-o fa-3x img" ></a> -->
+          <%}%>
+        </div>
+
+      </div>
+
+      <div class="divBotton">
+          <% if(nombre == undefined) { %>
+            <button class="general" type="submit">Enviar</button>
+          <%}%>
+      </div>
+    </fieldset>
+    </form>
+  </body>
+
+  <footer>
+      <hr class="hrTitulo">
+  </footer>
+
+
+  <script>
+        document.getElementById('image').onchange = function () {
+          document.getElementById('imag').value = document.getElementById('image').files[0].name;
+        }
+  </script>
+
+  <% if(exito == 1){%>
+    <script>
+    Swal.fire({
+
+      position: 'center',
+      icon: 'success',
+      title: 'Agregado con exito.',
+      showConfirmButton: false,
+      timer: 2000
+    })
+    </script>
+  <%}else if(exito == 2){%>
+    <script>
+    Swal.fire({
+
+      position: 'center',
+      icon: 'error',
+      title: 'ocurrio un error al guardar',
+      showConfirmButton: false,
+      timer: 2500
+    })
+    </script>
+  <% }%>
+</html>
